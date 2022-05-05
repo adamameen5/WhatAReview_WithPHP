@@ -7,6 +7,9 @@
     $query="select count(*) from reviews";
     $result=mysqli_query($con,$query) or die( mysqli_error($con));
     $row = mysqli_fetch_array($result);
+
+    $query1="select * from reviews";
+    $result1=mysqli_query($con,$query1) or die( mysqli_error($con));
 ?>
 <head>
     <meta charset="utf-8" />
@@ -67,6 +70,38 @@
                 <h4 id="ratingDetected" style="border: 1px rgb(179, 179, 179) solid;">No Review Posted Yet!</h4>
             </div>
         </div>
+
+        <div class="row m-1">
+            <div class="card-body table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-primary">
+                        <th>ID</th>
+                        <th>Original Review</th>
+                        <th>Summarized Review</th>
+                        <th>Sarcasm Detected</th>
+                        <th>Rating</th>
+                    </thead>
+                    <tbody>
+                    <?php
+                        while($rows=mysqli_fetch_array($result1))
+                        {
+                    ?>
+                        <tr>
+                            <td> <?php echo $rows['review_id']; ?> </td>
+                            <td> <?php echo $rows['original_review']; ?> </td>
+                            <td> <?php echo $rows['summarised_review']; ?> </td>
+                            <td> <?php echo $rows['sarcasm_detected']; ?> </td>
+                            <td> <?php echo $rows['rating_generated']; ?> </td>
+                        </tr>
+                        <?php
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
     </main>
 
 
