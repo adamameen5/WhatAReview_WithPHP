@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+    $con=mysqli_connect("127.0.0.1","root","root","WhatAReview",8889);
+    $query="select count(*) from reviews";
+    $result=mysqli_query($con,$query) or die( mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+?>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -33,7 +40,7 @@
             <a class="btn btn-primary" href="#writeReview">Write A Review</a>
         </div>
     </nav>
-
+    <h3><?php echo $row[0];?></h3>
     <main class="container" id="writeReview">
         <div class="bg-light p-5 mt-5 rounded">
             <h2>Type Your Review Here</h2>
