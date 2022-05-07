@@ -1,28 +1,3 @@
-.glyphicon-star {
-    color: gold;
-}
-
-span.glyphicon-calendar {
-    padding-left: 20px;
-}
-
-.fa-facebook-official {
-    color: #3b5998;
-    ;
-}
-
-.fa-twitter-square {
-    color: #00aced;
-}
-
-.fa-google-plus {
-    color: #dd4b39;
-}
-
-.hiColor {
-    color: goldenrod;
-}
-
 span.border-right {
     border-right: 2px solid;
     padding-right: 12px;
@@ -75,4 +50,10 @@ span.border-left-space {
     border-width: 5px;
     border-style: solid;
     border-color: transparent rgb(126, 126, 126) transparent transparent;
+}
+
+span.totalNumberOfReviews {
+    color: #727272;
+    font-size: 19px;
+    margin-left: 15px;
 }

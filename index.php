@@ -8,7 +8,7 @@
     $result=mysqli_query($con,$query) or die( mysqli_error($con));
     $row = mysqli_fetch_array($result);
 
-    $query1="select * from reviews";
+    $query1="select * from reviews order by review_id DESC";
     $result1=mysqli_query($con,$query1) or die( mysqli_error($con));
 
     $result2=mysqli_query($con,$query1) or die( mysqli_error($con));
@@ -50,6 +50,8 @@
             </div>
         </nav>
 
+
+
         <main class="container" id="writeReview">
             <div class="bg-light p-5 mt-5 rounded">
                 <h2>Type Your Review Here</h2>
@@ -77,49 +79,18 @@
                 </div>
             </div>
 
-            <div class="row m-1">
-                <div class="card-body table-responsive">
-                    <table class="table table-hover">
-                        <thead class="text-primary">
-                            <th>ID</th>
-                            <th>Original Review</th>
-                            <th>Summarized Review</th>
-                            <th>Sarcasm Detected</th>
-                            <th>Rating</th>
-                        </thead>
-                        <tbody>
-                            <?php
-                        while($rows=mysqli_fetch_array($result1))
-                        {
-                    ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $rows['review_id']; ?> </td>
-                                    <td>
-                                        <?php echo $rows['original_review']; ?> </td>
-                                    <td>
-                                        <?php echo $rows['summarised_review']; ?> </td>
-                                    <td>
-                                        <?php echo $rows['sarcasm_detected']; ?> </td>
-                                    <td>
-                                        <?php echo $rows['rating_generated']; ?> </td>
-                                </tr>
-                                <?php
-                            }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            <?php foreach($all_rows as $rowd) {
+            <div class="bg-light p-5 mt-4 rounded col-md-12" id="allReviews">
+                <h2>Reviews<span class="totalNumberOfReviews"> Total: <?php echo $row[0];?> </span></h2>
+
+                <?php foreach($all_rows as $rowd) {
                 if ($rowd['sarcasm_detected'] == 1) {
                     $d = "Detected";
                 } else {
                     $d = "Not Detected";
                 }
                 print   '<div class="row m-1">
-                            <div class="card" style="width: 100%; margin:2px;">
+                            <div class="card" style="width: 100%;">
                                 <div class="card-body">
                                     <!-- <span class="heading">Our Rating</span>
                                     <span class="fa fa-star checked"></span>
@@ -149,6 +120,7 @@
                         </div>';
             }
             ?>
+            </div>
         </main>
 
 
