@@ -22,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>What A Review</title>
+        <title>What A Review | Home</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -43,12 +43,36 @@
 
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
+        <!-- <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">What A Review!</a>
+                <a class="navbar-brand" href="#!">What A Reviews!</a>
                 <a class="btn btn-primary" href="#writeReview">Write A Review</a>
             </div>
+        </nav> -->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">What A Review!</a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reviews.php">View All Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">How Does it Work?</a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="btn btn-primary" href="index.php#writeReview">Write A Review</a>
+            </div>
         </nav>
+
 
 
 
@@ -57,7 +81,7 @@
                 <h2>Type Your Review Here</h2>
                 <p class="lead">Once you type your review, click the submit button to perform text-summarization and sarcasm detection.</p>
                 <textarea name="message" id="message" style="width:100%" rows="11"></textarea>
-                <button onclick="summarizeReview()" class="btn btn-primary">Submit</button>
+                <button onclick="summarizeReview()" class="btn btn-primary">Mine My Review</button>
             </div>
         </main>
 
@@ -65,8 +89,8 @@
             <div class="row m-1">
                 <div class="bg-light p-5 mt-4 rounded col-md-7">
                     <h2>Summary of the text you typed</h2>
-                    <p class="lead">This is not the actual summary. This is based on NLP algorithms. So there can be mistakes.</p>
-                    <textarea disabled id="summarizedReview" style="width:100%;" rows="10" placeholder="Please enter your review."></textarea>
+                    <p>This is not the actual summary. This is based on NLP algorithms which produces an extractive summary. So there can be mistakes.</p>
+                    <textarea disabled id="summarizedReview" style="width:100%;" rows="10" placeholder="Please type your review above to get the summary."></textarea>
                 </div>
                 <div class="bg-light p-5 mt-4 rounded col-md-5">
                     <h2>Sarcasm Detector</h2>
@@ -79,65 +103,85 @@
                 </div>
             </div>
 
-
-            <div class="bg-light p-5 mt-4 rounded col-md-12" id="allReviews">
-                <h2>Reviews<span class="totalNumberOfReviews"> Total: <?php echo $row[0];?> </span></h2>
-
-                <?php foreach($all_rows as $rowd) {
-                if ($rowd['sarcasm_detected'] == 1) {
-                    $d = "Detected";
-                } else {
-                    $d = "Not Detected";
-                }
-                print   '<div class="row m-1">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <!-- <span class="heading">Our Rating</span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="hiColor">Hi</span>
-                                    <a class="btn btn-primary">Go somewhere</a> -->
-                                    <h3 class="card-title">Original Review</h3>
-                                    <p>' .$rowd['original_review']. '</p>
-                                    <h4 class="card-title">Summarized Review</h4>
-                                    <p>' .$rowd['summarised_review']. '</p>
-                                    <span>Sarcasm:</span>
-                                    <span>' . $d . '</span>
-                                    <div class="tooltip">i
-                                        <span class="tooltiptext">This detector is based on Machine Learning algorithms. Therefore, the prediction would not be 100% accurate.</span>
-                                    </div>
-                                    <span class="border-right"></span>     
-                                    <span class="border-left-space">Our Rating:</span>
-                                    <span>' .$rowd['rating_generated']. '/5</span>
-                                    <div class="tooltip">i
-                                        <span class="tooltiptext">This rating is based on Machine Learning algorithms. Therefore, the prediction would not be 100% accurate.</span>
-                                    </div>      
-                                </div>
+            <div class="card-body" id="insertToDatabaseSection" style="display:none;">
+                <form action="insertReview.php" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Original Review</label>
+                                <input type="text" name="originalReview" id="originalReviewFormControl" class="form-control">
                             </div>
-                        </div>';
-            }
-            ?>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Summarised Review</label>
+                                <input type="text" name="summarisedReview" id="summarisedReviewFormControl" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Sarcasm Detected</label>
+                                <input type="text" name="sarcasmDetected" id="sarcasmDetectedFormControl" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Our Rating</label>
+                                <input type="text" name="ourRating" id="ourRatingFormControl" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Would you like to insert your review to our database?</h2>
+                    <p id="warningHeading" style="display:none;">Please note the below fields are missing from your review:</p>
+                    <ul>
+                        <li id="warningForSummary" style="display:none;">The summary of your review</li>
+                        <li id="warningForSarcasm" style="display:none;">The sarcasm detected status of your review</li>
+                        <li id="warningForRating" style="display:none;">The rating of your review</li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary" name="submit">Yes Insert</button>
+                    <div class="clearfix"></div>
+                </form>
             </div>
+
+
         </main>
 
 
 
         <script>
             async function summarizeReview() {
-                let summarizedReview = await sendReviewToSummarize();
-                var textSum = document.getElementById("message").value;
-                if (summarizedReview.length == 0) {
-                    document.getElementById("summarizedReview").innerHTML = "Your review is too small to be summarized.";
-                } else {
-                    document.getElementById("summarizedReview").innerHTML = summarizedReview;
+                var originalReview = document.getElementById("message").value;
+
+                if (originalReview.length == 0) {
+                    alert("Please add a review to be mined.");
+                    return;
+                } else if (originalReview.length < 50) {
+                    alert("Review is too small to be mined. Please add more content.");
+                    return;
                 }
 
-                console.log(summarizedReview)
+                $("#insertToDatabaseSection").show();
+
+                let summarizedReview = await sendReviewToSummarize();
+
+                if (summarizedReview.length == 0) {
+                    document.getElementById("summarizedReview").innerHTML = "Sorry! We could not summarize your review.";
+                } else {
+                    document.getElementById("summarizedReview").innerHTML = summarizedReview;
+                    $('#summarisedReviewFormControl').val(summarizedReview);
+                }
+
+                $('#originalReviewFormControl').val(originalReview);
+
+                if (summarizedReview.length == 0) {
+                    $("#warningHeading").show();
+                    $("#warningForSummary").show();
+                }
                 detectSarcasm();
                 getRating();
+
             }
 
 
@@ -170,11 +214,13 @@
                 if (sarcasmIdentifier == "It's a sarcasm!") {
                     $("#sarcasmDetectedButton").html("Sarcasm Detected");
                     $("#sarcasmDetectedButton").removeClass('btn-success').addClass('btn-warning');
+                    $('#sarcasmDetectedFormControl').val("1");
                 } else {
                     $("#sarcasmDetectedButton").html("Sarcasm Not Detected");
                     $("#sarcasmDetectedButton").removeClass('btn-warning').addClass('btn-success');
+                    $('#sarcasmDetectedFormControl').val("0");
                 }
-                console.log(sarcasmIdentifier)
+
             }
 
 
@@ -192,8 +238,25 @@
 
             async function getRating() {
                 let ratingGenerated = await sendReviewToGetRating();
-                console.log(ratingGenerated)
+
                 document.getElementById("ratingDetected").innerHTML = ratingGenerated;
+                var ratingToInsert = ratingGenerated.charAt(1);
+                $('#ourRatingFormControl').val(ratingToInsert);
+
+                if (ratingToInsert.length == 0) {
+                    $("#warningHeading").show();
+                    $("#warningForRating").show();
+                }
+            }
+
+            function showInsertAreaWarnings() {
+                var orignalReview = $('#originalReviewFormControl').val();
+                var summarisedReview = $('#summarisedReviewFormControl').val();
+                var sarcasmDetected = $('#sarcasmDetectedFormControl').val();
+
+
+
+
             }
 
             // $(function() {
