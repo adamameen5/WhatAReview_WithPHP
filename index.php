@@ -42,13 +42,6 @@
     </head>
 
     <body>
-        <!-- Navigation-->
-        <!-- <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" href="#!">What A Reviews!</a>
-                <a class="btn btn-primary" href="#writeReview">Write A Review</a>
-            </div>
-        </nav> -->
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
@@ -72,9 +65,6 @@
                 <a class="btn btn-primary" href="index.php#writeReview">Write A Review</a>
             </div>
         </nav>
-
-
-
 
         <main class="container" id="writeReview">
             <div class="bg-light p-5 mt-5 rounded">
@@ -144,8 +134,6 @@
                     <div class="clearfix"></div>
                 </form>
             </div>
-
-
         </main>
 
 
@@ -162,6 +150,7 @@
                     return;
                 }
 
+                //If the review is accepted to be mined, then show the section to add the review to the db.
                 $("#insertToDatabaseSection").show();
 
                 let summarizedReview = await sendReviewToSummarize();
@@ -220,7 +209,6 @@
                     $("#sarcasmDetectedButton").removeClass('btn-warning').addClass('btn-success');
                     $('#sarcasmDetectedFormControl').val("0");
                 }
-
             }
 
 
@@ -247,16 +235,6 @@
                     $("#warningHeading").show();
                     $("#warningForRating").show();
                 }
-            }
-
-            function showInsertAreaWarnings() {
-                var orignalReview = $('#originalReviewFormControl').val();
-                var summarisedReview = $('#summarisedReviewFormControl').val();
-                var sarcasmDetected = $('#sarcasmDetectedFormControl').val();
-
-
-
-
             }
 
             // $(function() {
