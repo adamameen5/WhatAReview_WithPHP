@@ -8,8 +8,12 @@
     $ourRating = $_POST['ourRating'];
 
     $insert="INSERT INTO `reviews`(`review_id`, `original_review`, `summarised_review`, `sarcasm_detected`, `rating_generated`) VALUES (null,'$originalReview','$summarisedReview','$sarcasmDetected','$ourRating')";
-
-    mysqli_query($con,$insert);
-
-    header("Location: reviews.php?");
+    echo $originalReview.$summarisedReview.$sarcasmDetected.$ourRating;
+    try {
+        mysqli_query($con,$insert);
+        header("Location: reviews.php?");
+    } catch (Exception $e){
+        echo "ERROR: Could not able to execute $insert. " . mysqli_error($con);
+    }
+    
 ?>
