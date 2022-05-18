@@ -58,7 +58,7 @@
                             <a class="nav-link" href="reviews.php">View All Reviews</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">How Does it Work?</a>
+                            <a class="nav-link" href="howItWorks.php">How Does it Work?</a>
                         </li>
                     </ul>
                 </div>
@@ -95,7 +95,7 @@
 
             <div class="card-body" id="insertToDatabaseSection" style="display:none;">
                 <form action="insertReview.php" method="POST">
-                    <div class="row">
+                    <div class="row" style="display:none;">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Original Review</label>
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="display:none;">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Sarcasm Detected</label>

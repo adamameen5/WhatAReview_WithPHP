@@ -55,10 +55,10 @@
                             <a class="nav-link" aria-current="page" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="reviews.php">View All Reviews</a>
+                            <a class="nav-link " href="reviews.php">View All Reviews</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="howItWorks.php">How Does it Work?</a>
+                            <a class="nav-link active" href="howItWorks.php">How Does it Work?</a>
                         </li>
                     </ul>
                 </div>
@@ -68,60 +68,34 @@
 
         <main class="container">
 
-            <div class="bg-light p-5 mt-4 rounded col-md-12" id="allReviews">
-                <h2>Reviews<span class="totalNumberOfReviews"> Total: <?php echo $row[0];?> reviews | Most recent on top</span></h2>
-
-                <?php foreach($all_rows as $rowd) {
-                if ($rowd['sarcasm_detected'] == 1) {
-                    $d = "Detected";
-                } else {
-                    $d = "Not Detected";
-                }
-                print   '<div class="row m-1" style="display:none;">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body">
-                                    <h4 class="card-title">Original Review</h4>
-                                    <p>' .$rowd['original_review']. '</p>
-                                    <h4 class="card-title">Summarized Review</h4>
-                                    <p>' .$rowd['summarised_review']. '</p>
-                                    <span>Sarcasm:</span>
-                                    <span>' . $d . '</span>
-                                    <div class="tooltip">i
-                                        <span class="tooltiptext">This detector is based on Machine Learning algorithms. Therefore, the prediction would not be 100% accurate.</span>
-                                    </div>
-                                    <span class="border-right"></span>     
-                                    <span class="border-left-space">Our Rating:</span>
-                                    <span>' .$rowd['rating_generated']. '/5</span>
-                                    <div class="tooltip">i
-                                        <span class="tooltiptext">This rating is based on Machine Learning algorithms. Therefore, the prediction would not be 100% accurate.</span>
-                                    </div>      
-                                </div>
-                            </div>
-                        </div>';
-            }
-            ?>
-            <button type="button" id="loadMore" class="loadMoreButton">
-                Load More
-            </button>
+            <div>
+                <div class="row smpl-step" style="border-bottom: 0; min-width: 500px;">
+                    <div class="col-xs-3 smpl-step-step complete">
+                        <div class="text-center step-number">Step 1</div>
+                        <div class="text-center step-description">Enter your text/review which you would like to mine.</div>
+                        <img src="assets/img/step 1.png" alt="Step 1" class="centerImage">
+                    </div>
+                    <div class="col-xs-3 smpl-step-step complete">
+                        <div class="text-center step-number">Step 2</div>
+                        <div class="text-center step-description">Click 'Mine My Review'</div>
+                        <img src="assets/img/step 2.png" alt="Step 2" class="centerImage">
+                    </div>
+                    <div class="col-xs-3 smpl-step-step complete">
+                        <div class="text-center step-number">Step 3</div>
+                        <div class="text-center step-description">Have a look at the results we generated for your review.</div>
+                        <img src="assets/img/step 3.png" alt="Step 3" class="centerImage">
+                    </div>
+                    <div class="col-xs-3 smpl-step-step complete">
+                        <div class="text-center step-number">Step 4</div>
+                        <div class="text-center step-description">If your review was successfully mined, you could choose to insert your review to our database.</div>
+                        <img src="assets/img/step 4.png" alt="Step 3" class="centerImage">
+                    </div>
+                </div>
             </div>
 
 
         </main>
 
-
-
-        <script>
-            $(function() {
-                $("div").slice(0, 15).show(); // select the first ten
-                $("#loadMore").click(function(e) { // click event for load more
-                    e.preventDefault();
-                    $("div:hidden").slice(0, 10).show(); // select next 10 hidden divs and show them
-                    if ($("div:hidden").length == 0) { // check if any hidden divs still exist
-                        alert("No more divs"); // alert if there are none left
-                    }
-                });
-            });
-        </script>
     </body>
 
 </html>
