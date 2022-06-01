@@ -9,7 +9,6 @@
     $row = mysqli_fetch_array($result);
 
     $query1="select * from reviews order by review_id DESC";
-    $result1=mysqli_query($con,$query1) or die( mysqli_error($con));
 
     $result2=mysqli_query($con,$query1) or die( mysqli_error($con));
     $all_rows = mysqli_fetch_all($result2, MYSQLI_ASSOC);
@@ -45,7 +44,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="#">What A Review!</a>
+                <a class="navbar-brand" href="index.php">What A Review!</a>
                 <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
